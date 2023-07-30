@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import application.componentes.Pdf;
 import application.utilidades.ClobConverter;
-import application.utilidades.DatabaseConexion;
+import application.utilidades.DatabaseConnection;
 
 public class PdfReg {
 	Connection con;
@@ -19,7 +19,7 @@ public class PdfReg {
 	ResultSet rs;
 
 	public PdfReg() {
-		con = DatabaseConexion.getConneccion();
+		con = DatabaseConnection.getConnection();
 		ps = null;
 		rs = null;
 	}
@@ -63,7 +63,7 @@ public class PdfReg {
 	public ArrayList<Pdf> extraerRegistros(){
 		ArrayList<Pdf> registros = new ArrayList<>();
 		try {
-			Connection conexion = DatabaseConexion.getConneccion();
+			Connection conexion = DatabaseConnection.getConnection();
 			Statement statement = conexion.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM pdf_todo");
 			while (resultado.next()) {
@@ -88,7 +88,7 @@ public class PdfReg {
 	public ArrayList<Pdf> extraerVisualizables(){
 		ArrayList<Pdf> registros = new ArrayList<>();
 		try {
-			Connection conexion = DatabaseConexion.getConneccion();
+			Connection conexion = DatabaseConnection.getConnection();
 			Statement statement = conexion.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM pdf_visual_uno");
 			while (resultado.next()) {
@@ -113,7 +113,7 @@ public class PdfReg {
 	public ArrayList<Pdf> extraerNoVisualizables(){
 		ArrayList<Pdf> registros = new ArrayList<>();
 		try {
-			Connection conexion = DatabaseConexion.getConneccion();
+			Connection conexion = DatabaseConnection.getConnection();
 			Statement statement = conexion.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM pdf_visual_cero");
 			while (resultado.next()) {

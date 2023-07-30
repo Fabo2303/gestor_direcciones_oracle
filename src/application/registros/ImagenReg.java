@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import application.componentes.Imagen;
 import application.utilidades.ClobConverter;
-import application.utilidades.DatabaseConexion;
+import application.utilidades.DatabaseConnection;
 
 public class ImagenReg {
 	Connection con;
@@ -13,7 +13,7 @@ public class ImagenReg {
 	ResultSet rs;
 
 	public ImagenReg() {
-		con = DatabaseConexion.getConneccion();
+		con = DatabaseConnection.getConnection();
 		ps = null;
 		rs = null;
 	}
@@ -57,7 +57,7 @@ public class ImagenReg {
 	public ArrayList<Imagen> extraerRegistros(){
 		ArrayList<Imagen> registros = new ArrayList<>();
 		try {
-			Connection conexion = DatabaseConexion.getConneccion();
+			Connection conexion = DatabaseConnection.getConnection();
 			Statement statement = conexion.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM imagen_todo");
 			while (resultado.next()) {
@@ -82,7 +82,7 @@ public class ImagenReg {
 	public ArrayList<Imagen> extraerVisualizables(){
 		ArrayList<Imagen> registros = new ArrayList<>();
 		try {
-			Connection conexion = DatabaseConexion.getConneccion();
+			Connection conexion = DatabaseConnection.getConnection();
 			Statement statement = conexion.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM imagen_visual_uno");
 			while (resultado.next()) {
@@ -107,7 +107,7 @@ public class ImagenReg {
 	public ArrayList<Imagen> extraerNoVisualizables(){
 		ArrayList<Imagen> registros = new ArrayList<>();
 		try {
-			Connection conexion = DatabaseConexion.getConneccion();
+			Connection conexion = DatabaseConnection.getConnection();
 			Statement statement = conexion.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM imagen_visual_cero");
 			while (resultado.next()) {

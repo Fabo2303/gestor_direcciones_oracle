@@ -8,8 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import application.componentes.Auditoria;
-import application.utilidades.ClobConverter;
-import application.utilidades.DatabaseConexion;
+import application.utilidades.DatabaseConnection;
 
 public class AuditoriaReg {
 	Connection con;
@@ -17,7 +16,7 @@ public class AuditoriaReg {
 	ResultSet rs;
 	
 	public AuditoriaReg() {
-		con = DatabaseConexion.getConneccion();
+		con = DatabaseConnection.getConnection();
 		ps = null;
 		rs = null;
 	}
@@ -25,7 +24,7 @@ public class AuditoriaReg {
 	public ArrayList<Auditoria> extraerRegistros(String vista){
 		ArrayList<Auditoria> registros = new ArrayList<>();
 		try {
-			Connection conexion = DatabaseConexion.getConneccion();
+			Connection conexion = DatabaseConnection.getConnection();
 			Statement statement = conexion.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM vista_" + vista);
 			while (resultado.next()) {

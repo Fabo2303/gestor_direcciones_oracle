@@ -10,13 +10,13 @@ import java.util.ArrayList;
 
 import application.componentes.Video;
 import application.utilidades.ClobConverter;
-import application.utilidades.DatabaseConexion;
+import application.utilidades.DatabaseConnection;
 
 public class VideoReg {
 	Connection con;
 
 	public VideoReg() {
-		con = DatabaseConexion.getConneccion();
+		con = DatabaseConnection.getConnection();
 	}
 
 	public void agregar(Video v) {
@@ -58,7 +58,7 @@ public class VideoReg {
 	public ArrayList<Video> extraerRegistros(){
 		ArrayList<Video> registros = new ArrayList<>();
 		try {
-			Connection conexion = DatabaseConexion.getConneccion();
+			Connection conexion = DatabaseConnection.getConnection();
 			Statement statement = conexion.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM video_todo");
 			while (resultado.next()) {
@@ -83,7 +83,7 @@ public class VideoReg {
 	public ArrayList<Video> extraerVisualizables(){
 		ArrayList<Video> registros = new ArrayList<>();
 		try {
-			Connection conexion = DatabaseConexion.getConneccion();
+			Connection conexion = DatabaseConnection.getConnection();
 			Statement statement = conexion.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM video_visual_uno");
 			while (resultado.next()) {
@@ -108,7 +108,7 @@ public class VideoReg {
 	public ArrayList<Video> extraerNoVisualizables(){
 		ArrayList<Video> registros = new ArrayList<>();
 		try {
-			Connection conexion = DatabaseConexion.getConneccion();
+			Connection conexion = DatabaseConnection.getConnection();
 			Statement statement = conexion.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM video_visual_cero");
 			while (resultado.next()) {

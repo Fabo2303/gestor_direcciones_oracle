@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import application.componentes.Proyecto;
-import application.utilidades.DatabaseConexion;
+import application.utilidades.DatabaseConnection;
 
 public class ProyectoReg {
 	Connection con;
@@ -15,7 +15,7 @@ public class ProyectoReg {
 	ResultSet rs;
 
 	public ProyectoReg() {
-		con = DatabaseConexion.getConneccion();
+		con = DatabaseConnection.getConnection();
 		ps = null;
 		rs = null;
 	}
@@ -23,7 +23,7 @@ public class ProyectoReg {
 	public ArrayList<Proyecto> extraerProyectos(){
 		ArrayList<Proyecto> registros = new ArrayList<>();
 		try {
-			Connection conexion = DatabaseConexion.getConneccion();
+			Connection conexion = DatabaseConnection.getConnection();
 			Statement statement = conexion.createStatement();
 			ResultSet resultado = statement.executeQuery("SELECT * FROM proyecto_cod_nombre");
 			while (resultado.next()) {

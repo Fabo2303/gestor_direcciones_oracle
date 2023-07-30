@@ -10,56 +10,57 @@ import application.inicial.PantallaCrudPdf;
 import application.inicial.PantallaCrudVideo;
 import application.tabla.TablaAuditoria;
 import application.utilidades.Boton;
-import application.utilidades.CargaImagen;
+import application.utilidades.CustomPanel.ImagePanel;
 import application.utilidades.Formato;
 
 public class InterfazInicio{
-	private JFrame ventana;
-	private JPanel fondo = new JPanel();
-	private JLabel background;
+	private JFrame myFrame;
+	private ImagePanel background;
 	private Formato formato;
-	private Boton buttonVids = new Boton();
-	private Boton buttonPDF = new Boton();
-	private Boton buttonImages = new Boton();
-	private Boton buttonAuditoria = new Boton();
 	private final int WIDTH = 1280;
 	private final int HEIGHT = 720;
 	
 	public InterfazInicio() {
 		this.formato = new Formato();
-		this.ventana = new JFrame();
+		this.myFrame = new JFrame();
+		initFondo();
 		initFrame();
 		initContenido();
-		initFondo();
 	}
 	
-	public InterfazInicio(JFrame ventana) {
-		this.ventana = ventana;
+	public InterfazInicio(JFrame myFrame) {
+		this.myFrame = myFrame;
 		this.formato = new Formato();
+		initFondo();
 		initFrame();
 		initContenido();
-		initFondo();
+	}
+
+	public void initFrame(){
+		myFrame.setSize(WIDTH,HEIGHT);
+		myFrame.setLocationRelativeTo(null);
+		myFrame.setTitle("Sitio web de peliculas");
+		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ImageIcon icon = new ImageIcon("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\server.png");
+		myFrame.setIconImage(icon.getImage());
+		myFrame.setResizable(false);
+		myFrame.setVisible(true);
 	}
 
 	private void initFondo() {
-		fondo.setLayout(null);
-		initFondoPantalla();
-		ventana.getContentPane().revalidate();
-		ventana.getContentPane().repaint();
-	}
-	
-	private void initFondoPantalla() {
-		background = new JLabel();
-		background.setBounds(0, 0, WIDTH, HEIGHT);
-		CargaImagen.setImagen(background, "fondo.png");
-		fondo.add(background);
-		ventana.getContentPane().add(fondo);
+		background = new ImagePanel("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		background.setLayout(null);
+		myFrame.getContentPane().add(background);
 	}
 	
 	private void initContenido(){
 		initLabels();
-		initBotones();
-		initFunciones();
+		initButtonVid();
+		initButtonPdf();
+		initButtonImage();
+		initButtonAuditoria();
+		myFrame.repaint();
+		myFrame.revalidate();
 	}
 	
 	private void initLabels() {
@@ -67,83 +68,73 @@ public class InterfazInicio{
 		Text.setHorizontalAlignment(JLabel.CENTER);
 		Text.setBounds((int)(WIDTH*0.05), (int)(HEIGHT*0.09), (int)(WIDTH*0.9), (int)(HEIGHT*0.1));
 		formato.formato(Text, 0, (int)(WIDTH*0.0375));
-        fondo.add(Text);
+        background.add(Text);
         
         JLabel Text2 = new JLabel("Seleccione una opción:");
 		Text2.setHorizontalAlignment(JLabel.CENTER);
         Text2.setBounds((int)(WIDTH*0.175), (int)(HEIGHT*0.23), (int)(WIDTH*0.65), (int)(HEIGHT*0.1));
 		formato.formato(Text2, 0, (int)(WIDTH*0.02625));
-        fondo.add(Text2);
+        background.add(Text2);
 	}
-	
-	private void initBotones() {
-		Formato formato = new Formato();
-		buttonVids.setBounds((WIDTH*11/17)/2, (int)(HEIGHT*0.37), (int)(WIDTH*6/17), (int)(HEIGHT*7/72));
-		formato.formato(buttonVids, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
-		buttonVids.setText("VIDEOS");
-		fondo.add(buttonVids);
-		
+
+	private void initButtonVid(){
+		Boton buttonVid = new Boton();
+		buttonVid.setBounds((WIDTH*11/17)/2, (int)(HEIGHT*0.37), (int)(WIDTH*6/17), (int)(HEIGHT*7/72));
+		formato.formato(buttonVid, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
+		buttonVid.setText("VIDEOS");
+		buttonVid.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				myFrame.remove(background);
+				PantallaCrudVideo crudVideo = new PantallaCrudVideo(myFrame);
+			}
+		});
+		background.add(buttonVid);
+	}
+
+	private void initButtonPdf(){
+		Boton buttonPDF = new Boton();
 		buttonPDF.setBounds((WIDTH*11/17)/2, (int)(HEIGHT*0.49), (int)(WIDTH*6/17), (int)(HEIGHT*7/72));
 		formato.formato(buttonPDF, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
 		buttonPDF.setText("PDF");
-		fondo.add(buttonPDF);
-		
-		buttonImages.setBounds((WIDTH*11/17)/2, (int)(HEIGHT*0.61), (int)(WIDTH*6/17), (int)(HEIGHT*7/72));
-		formato.formato(buttonImages, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
-		buttonImages.setText("IMÁGENES");
-		fondo.add(buttonImages);
-		
-		buttonAuditoria.setBounds((WIDTH*11/17)/2, (int)(HEIGHT*0.73), (int)(WIDTH*6/17), (int)(HEIGHT*7/72));
-		formato.formato(buttonAuditoria, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
-		buttonAuditoria.setText("AUDITORÍA");
-		fondo.add(buttonAuditoria);
-	}
-	
-	public void initFunciones() {
-		buttonVids.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				ventana.remove(fondo);
-				PantallaCrudVideo crudVideo = new PantallaCrudVideo(ventana);
-			}
-		});
-		
 		buttonPDF.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.remove(fondo);
-				PantallaCrudPdf crudPdf = new PantallaCrudPdf(ventana);
+				myFrame.remove(background);
+				PantallaCrudPdf crudPdf = new PantallaCrudPdf(myFrame);
 			}
 		});
-		
-		buttonImages.addMouseListener(new MouseAdapter() {
+		background.add(buttonPDF);
+	}
+
+	private void initButtonImage(){
+		Boton buttonImage = new Boton();
+		buttonImage.setBounds((WIDTH*11/17)/2, (int)(HEIGHT*0.61), (int)(WIDTH*6/17), (int)(HEIGHT*7/72));
+		formato.formato(buttonImage, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
+		buttonImage.setText("IMÁGENES");
+		buttonImage.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.remove(fondo);
-				PantallaCrudImagen crudImagen = new PantallaCrudImagen(ventana);
+				myFrame.remove(background);
+				PantallaCrudImagen crudImagen = new PantallaCrudImagen(myFrame);
 			}
 		});
-		
+		background.add(buttonImage);
+	}
+
+	private void initButtonAuditoria(){
+		Boton buttonAuditoria = new Boton();
+		buttonAuditoria.setBounds((WIDTH*11/17)/2, (int)(HEIGHT*0.73), (int)(WIDTH*6/17), (int)(HEIGHT*7/72));
+		formato.formato(buttonAuditoria, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
+		buttonAuditoria.setText("AUDITORÍA");
 		buttonAuditoria.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.remove(fondo);
-				TablaAuditoria tablaAuditoria = new TablaAuditoria(ventana);
+				myFrame.remove(background);
+				TablaAuditoria tablaAuditoria = new TablaAuditoria(myFrame);
 			}
 		});
-	}
-	
-	
-	
-	public void initFrame(){
-		ventana.setSize(WIDTH,HEIGHT);
-		ventana.setLocationRelativeTo(null);
-		ventana.setTitle("Sitio web de peliculas");
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ImageIcon icon = new ImageIcon("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\server.png");
-		ventana.setIconImage(icon.getImage());
-		ventana.setResizable(false);
-		ventana.setVisible(true);
+		background.add(buttonAuditoria);
 	}
 	
 	public static void main(String[] args) {

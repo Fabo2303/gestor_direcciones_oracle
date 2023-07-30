@@ -11,7 +11,6 @@ public class Auditoria {
 		this.origen = origen;
 		this.fecha = fecha;		
 		this.accion = accion;
-
 	}
 	
 	public String getOrigen() {
@@ -29,5 +28,4 @@ public class Auditoria {
 	public int getId() {
 		return id;
 	}
-
 }
