@@ -3,9 +3,7 @@ package application;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import application.inicial.PantallaCrudImagen;
 import application.inicial.PantallaCrudPdf;
@@ -142,6 +140,8 @@ public class InterfazInicio{
 		ventana.setLocationRelativeTo(null);
 		ventana.setTitle("Sitio web de peliculas");
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ImageIcon icon = new ImageIcon("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\server.png");
+		ventana.setIconImage(icon.getImage());
 		ventana.setResizable(false);
 		ventana.setVisible(true);
 	}
