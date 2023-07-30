@@ -1,0 +1,69 @@
+CREATE VIEW vista_todos_todos AS
+SELECT *
+FROM AUDITORIA;
+
+
+CREATE VIEW vista_insert_todos AS
+SELECT *
+FROM AUDITORIA
+WHERE ACCION = 'insert';
+
+
+CREATE VIEW vista_update_todos AS
+SELECT *
+FROM AUDITORIA
+WHERE ACCION = 'update';
+
+
+CREATE VIEW vista_todos_pdf AS
+SELECT *
+FROM AUDITORIA
+WHERE TABLA_AFECTADA = 'pdf';
+
+
+CREATE VIEW vista_todos_video AS
+SELECT *
+FROM AUDITORIA
+WHERE TABLA_AFECTADA = 'video';
+
+
+CREATE VIEW vista_todos_imagen AS
+SELECT *
+FROM AUDITORIA
+WHERE TABLA_AFECTADA = 'imagen';
+
+
+CREATE VIEW vista_insert_pdf AS
+SELECT *
+FROM AUDITORIA
+WHERE ACCION = 'insert' AND TABLA_AFECTADA = 'pdf';
+
+
+CREATE VIEW vista_update_pdf AS
+SELECT *
+FROM AUDITORIA
+WHERE ACCION = 'update' AND TABLA_AFECTADA = 'pdf';
+
+
+CREATE VIEW vista_insert_video AS
+SELECT *
+FROM AUDITORIA
+WHERE ACCION = 'insert' AND TABLA_AFECTADA = 'video';
+
+
+CREATE VIEW vista_update_video AS
+SELECT *
+FROM AUDITORIA
+WHERE ACCION = 'update' AND TABLA_AFECTADA = 'video';
+
+
+CREATE VIEW vista_insert_imagen AS
+SELECT *
+FROM AUDITORIA
+WHERE ACCION = 'insert' AND TABLA_AFECTADA = 'imagen';
+
+
+CREATE VIEW vista_update_imagen AS
+SELECT *
+FROM AUDITORIA
+WHERE ACCION = 'update' AND TABLA_AFECTADA = 'imagen';
