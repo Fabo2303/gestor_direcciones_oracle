@@ -43,17 +43,17 @@ public class PantallaCrudVideo{
 	}
 	
 	private void initLabels() {
-		JLabel Text = new JLabel("CRUD DE VIDEOS");
-		Text.setHorizontalAlignment(JLabel.CENTER);
-		Text.setBounds((int)(WIDTH*0.05), (int)(HEIGHT*0.09), (int)(WIDTH*0.9), (int)(HEIGHT*0.1));
-		formato.formato(Text, 0, (int)(WIDTH*0.0375));
-        background.add(Text);
+		JLabel text = new JLabel("CRUD DE VIDEOS");
+		text.setHorizontalAlignment(JLabel.CENTER);
+		text.setBounds((int)(WIDTH*0.05), (int)(HEIGHT*0.09), (int)(WIDTH*0.9), (int)(HEIGHT*0.1));
+		formato.formato(text, 0, (int)(WIDTH*0.0375));
+        background.add(text);
 
-        JLabel Text2 = new JLabel("Seleccione una opción:");
-		Text2.setHorizontalAlignment(JLabel.CENTER);
-        Text2.setBounds((int)(WIDTH*0.175), (int)(HEIGHT*0.23), (int)(WIDTH*0.65), (int)(HEIGHT*0.1));
-		formato.formato(Text2, 0, (int)(WIDTH*0.02625));
-        background.add(Text2);
+        JLabel text2 = new JLabel("Seleccione una opción:");
+		text2.setHorizontalAlignment(JLabel.CENTER);
+        text2.setBounds((int)(WIDTH*0.175), (int)(HEIGHT*0.23), (int)(WIDTH*0.65), (int)(HEIGHT*0.1));
+		formato.formato(text2, 0, (int)(WIDTH*0.02625));
+        background.add(text2);
 	}
 
 	private void initButtonAgregar(){

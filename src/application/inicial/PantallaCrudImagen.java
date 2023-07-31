@@ -26,7 +26,7 @@ public class PantallaCrudImagen{
 	private final int WIDTH = 1280;
 	private final int HEIGHT = 720;
 	
-	public PantallaCrudImagen(JFrame ventana) {
+	public PantallaCrudImagen(JFrame myFrame) {
 		this.formato = new Formato();
 		this.myFrame = myFrame;
 		initBackground();

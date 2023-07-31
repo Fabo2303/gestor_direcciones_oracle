@@ -14,7 +14,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -26,17 +25,14 @@ import application.inicial.PantallaCrudVideo;
 import application.registros.ProyectoReg;
 import application.registros.VideoReg;
 import application.utilidades.Boton;
-import application.utilidades.CargaImagen;
+import application.utilidades.CustomPanel.ImagePanel;
 import application.utilidades.Formato;
 
 public class PantallaIngresarVideo {
-
-	private JFrame ventana;
-	private JPanel panelFondo;
-	private JLabel imagenFondo, titulo1Label, titulo2Label, nombreLabel, descripcionLabel, urlLabel, idProyLabel;
-	private JTextField nombreField, urlField, idProyField;
+	private JFrame myFrame;
+	private ImagePanel background;
+	private JTextField fieldNombre, urlField;
 	private JTextArea descripcionArea;
-	private Boton cargarImagenBtn, guardarBtn, volverBtn;
 	private Formato formato;
 	private VideoReg videoReg;
 	private ProyectoReg proyReg;
@@ -45,130 +41,107 @@ public class PantallaIngresarVideo {
 	private final int WIDTH = 1280;
 	private final int HEIGHT = 720;
 
-	public PantallaIngresarVideo(JFrame ventana_) {
-		this.ventana = ventana_;
-		this.videoReg = new VideoReg();
-		this.panelFondo = new JPanel();
-		this.formato = new Formato();
-		this.proyReg = new ProyectoReg();
-		// this.editado = false;
-		configVentana();
-		initFondo();
-		initComponentes();
-		ventana.getContentPane().repaint();
-		ventana.getContentPane().revalidate();
+	public PantallaIngresarVideo(JFrame myFrame) {
+		this.myFrame = myFrame;
+		videoReg = new VideoReg();
+		formato = new Formato();
+		proyReg = new ProyectoReg();
+		initBackground();
+		initContent();
+		myFrame.getContentPane().repaint();
+		myFrame.getContentPane().revalidate();
 	}
 
-	private void configVentana() {
-		ventana.setSize(WIDTH, HEIGHT);
-		ventana.setLocationRelativeTo(null);
-		panelFondo.setLayout(null);
-		ventana.getContentPane().add(panelFondo);
+	private void initBackground() {
+		background = new ImagePanel("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		background.setLayout(null);
+		myFrame.getContentPane().add(background);
 	}
 
-	private void initFondo() {
-		ventana.setSize(WIDTH, HEIGHT);
-		ventana.setLocationRelativeTo(null);
+	private void initContent() {
+		initLabels();
+		initLabelNombre();
+		initLabelDescripcion();
+		initLabelUrl();
+		initLabelProy();
+		initButtonBack();
 	}
 
-	private void pintarFondo() {
-		imagenFondo = new JLabel();
-		imagenFondo.setBounds(0, 0, WIDTH, HEIGHT);
-		CargaImagen.setImagen(imagenFondo, "fondo.png");
-		panelFondo.add(imagenFondo);
-	}
-
-	private void initComponentes() {
-		
-		initNombre();
-		initTitulo();
-		initDescripcion();
-		initUrl();
-		initProy();
-		initBack();
-		pintarFondo();
-	}
-
-	private void initTitulo() {
-		titulo1Label = new JLabel("AGREGAR");
-		titulo1Label.setBounds((int) (WIDTH * 0.095), (int) (HEIGHT * 0.085), (int) (WIDTH * 0.45),
+	private void initLabels() {
+		JLabel text = new JLabel("AGREGAR");
+		text.setBounds((int) (WIDTH * 0.095), (int) (HEIGHT * 0.085), (int) (WIDTH * 0.45),
 				(int) (HEIGHT * 0.055));
-		formato.formato(titulo1Label, 1, (float) (HEIGHT * 0.055));
-		titulo1Label.setForeground(new Color(255, 102, 196));
-		panelFondo.add(titulo1Label);
+		formato.formato(text, 1, (float) (HEIGHT * 0.055));
+		text.setForeground(new Color(255, 102, 196));
+		background.add(text);
 
-		titulo2Label = new JLabel("VIDEO");
-		titulo2Label.setBounds((int) (titulo1Label.getX()+titulo1Label.getWidth()/2 - WIDTH*0.05), (int) (titulo1Label.getY()+titulo1Label.getHeight()+HEIGHT*0.005), (int) (WIDTH * 0.45),
+		JLabel text2 = new JLabel("VIDEO");
+		text2.setBounds((int) (text.getX()+text.getWidth()/2 - WIDTH*0.05), (int) (text.getY()+text.getHeight()+HEIGHT*0.005), (int) (WIDTH * 0.45),
 				(int) (HEIGHT * 0.055));
-		formato.formato(titulo2Label, 1, (float) (HEIGHT * 0.055));
-		titulo2Label.setForeground(new Color(255, 102, 196));
-		panelFondo.add(titulo2Label);
-
+		formato.formato(text2, 1, (float) (HEIGHT * 0.055));
+		text2.setForeground(new Color(255, 102, 196));
+		background.add(text2);
 	}
 
-	private void initNombre() {
-		nombreLabel = new JLabel("NOMBRE DEL VIDEO:");
-		nombreLabel.setBounds((int) (WIDTH * 0.075), (int) (HEIGHT * 0.275), (int) ((int) (WIDTH * 0.45)),
+	private void initLabelNombre() {
+		JLabel labelNombre = new JLabel("NOMBRE DEL VIDEO:");
+		labelNombre.setBounds((int) (WIDTH * 0.075), (int) (HEIGHT * 0.275), (int) ((int) (WIDTH * 0.45)),
 				(int) (HEIGHT * 0.055));
-		formato.formato(nombreLabel, 1, (float) (HEIGHT * 0.045));
-		panelFondo.add(nombreLabel);
+		formato.formato(labelNombre, 1, (float) (HEIGHT * 0.045));
+		background.add(labelNombre);
 
-		nombreField = new JTextField();
-		nombreField.setBounds((int) (nombreLabel.getX() + WIDTH * 0.025),
-				(int) (nombreLabel.getY() + nombreLabel.getHeight() + HEIGHT * 0.025), (int) (WIDTH * 0.35),
-				(int) (nombreLabel.getHeight()));
-		formato.formato(nombreField, 0, (float) (HEIGHT * 0.035));
-		nombreField.setEditable(true);
-		nombreField.setFocusable(true);
-		MouseAdapter editNombre = new MouseAdapter() {
+		fieldNombre = new JTextField();
+		fieldNombre.setBounds((int) (labelNombre.getX() + WIDTH * 0.025),
+				(int) (labelNombre.getY() + labelNombre.getHeight() + HEIGHT * 0.025), (int) (WIDTH * 0.35),
+				(int) (labelNombre.getHeight()));
+		formato.formato(fieldNombre, 0, (float) (HEIGHT * 0.035));
+		fieldNombre.setEditable(true);
+		fieldNombre.setFocusable(true);
+		fieldNombre.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				nombreField.setEditable(true);
-				nombreField.setFocusable(true);
+				fieldNombre.setEditable(true);
+				fieldNombre.setFocusable(true);
 			}
-		};
-
-		nombreField.addMouseListener(editNombre);
-		panelFondo.add(nombreField);
+		});
+		background.add(fieldNombre);
 
 		JLabel contorno = new JLabel();
-		contorno.setBounds((int) (nombreField.getX() - WIDTH * 0.004), (int) (nombreField.getY() - WIDTH * 0.004),
-				(int) (nombreField.getWidth() + WIDTH * 0.008), (int) (nombreField.getHeight() + WIDTH * 0.008));
+		contorno.setBounds((int) (fieldNombre.getX() - WIDTH * 0.004), (int) (fieldNombre.getY() - WIDTH * 0.004),
+				(int) (fieldNombre.getWidth() + WIDTH * 0.008), (int) (fieldNombre.getHeight() + WIDTH * 0.008));
 		contorno.setOpaque(false);
 		contorno.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-		panelFondo.add(contorno);
+		background.add(contorno);
 	}
 
-	private void initDescripcion() {
-		descripcionLabel = new JLabel("DESCRIPCION:");
-		descripcionLabel.setBounds((int) (nombreLabel.getX()),
-				(int) (nombreField.getY() + nombreField.getHeight() + HEIGHT * 0.05), (int) (nombreLabel.getWidth()),
-				(int) (nombreLabel.getHeight()));
+	private void initLabelDescripcion() {
+		JLabel descripcionLabel = new JLabel("DESCRIPCION:");
+		descripcionLabel.setBounds((int) (WIDTH * 0.075),
+				(int) (fieldNombre.getY() + fieldNombre.getHeight() + HEIGHT * 0.05), (int) ((int) (WIDTH * 0.45)),
+				(int) (HEIGHT * 0.055));
 		formato.formato(descripcionLabel, 1, (float) (HEIGHT * 0.045));
-		panelFondo.add(descripcionLabel);
+		background.add(descripcionLabel);
 
 		descripcionArea = new JTextArea();
 		descripcionArea.setBounds((int) (descripcionLabel.getX() + WIDTH * 0.025),
 				(int) (descripcionLabel.getY() + descripcionLabel.getHeight() + HEIGHT * 0.025),
-				(int) (nombreField.getWidth()), (int) (4.25 * nombreField.getHeight()));
+				(int) (fieldNombre.getWidth()), (int) (4.25 * fieldNombre.getHeight()));
 		formato.formato(descripcionArea, 0, (float) (HEIGHT * 0.035));
 		descripcionArea.setEditable(true);
 		descripcionArea.setFocusable(true);
-		MouseAdapter editDescrpcion = new MouseAdapter() {
+		descripcionArea.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				descripcionArea.setEditable(true);
 				descripcionArea.setFocusable(true);
 			}
-		};
-
-		descripcionArea.addMouseListener(editDescrpcion);
-		panelFondo.add(descripcionArea);
+		});
+		background.add(descripcionArea);
 
 		JScrollPane descripcionScroll = new JScrollPane(descripcionArea);
 		descripcionScroll.setBounds(descripcionArea.getX(), descripcionArea.getY(), descripcionArea.getWidth(),
 				descripcionArea.getHeight());
-		panelFondo.add(descripcionScroll);
+		background.add(descripcionScroll);
 
 		JLabel contorno = new JLabel();
 		contorno.setBounds((int) (descripcionArea.getX() - WIDTH * 0.004),
@@ -176,14 +149,14 @@ public class PantallaIngresarVideo {
 				(int) (descripcionArea.getHeight() + WIDTH * 0.008));
 		contorno.setOpaque(false);
 		contorno.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-		panelFondo.add(contorno);
+		background.add(contorno);
 	}
 
-	private void initUrl() {
-		urlLabel = new JLabel("URL:");
+	private void initLabelUrl() {
+		JLabel urlLabel = new JLabel("URL:");
 		urlLabel.setBounds((int) (WIDTH * 0.55), (int) (HEIGHT * 0.085), (int) (WIDTH * 0.45), (int) (HEIGHT * 0.055));
 		formato.formato(urlLabel, 1, (float) (HEIGHT * 0.045));
-		panelFondo.add(urlLabel);
+		background.add(urlLabel);
 
 		urlField = new JTextField();
 		urlField.setBounds((int) (urlLabel.getX() + WIDTH * 0.025),
@@ -192,33 +165,30 @@ public class PantallaIngresarVideo {
 		formato.formato(urlField, 0, (float) (HEIGHT * 0.035));
 		urlField.setEditable(true);
 		urlField.setFocusable(true);
-		MouseAdapter editUrl = new MouseAdapter() {
+		urlField.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				urlField.setEditable(true);
 				urlField.setFocusable(true);
 			}
-		};
-
-		urlField.addMouseListener(editUrl);
-		panelFondo.add(urlField);
+		});
+		background.add(urlField);
 
 		JLabel contorno = new JLabel();
 		contorno.setBounds((int) (urlField.getX() - WIDTH * 0.004), (int) (urlField.getY() - WIDTH * 0.004),
 				(int) (urlField.getWidth() + WIDTH * 0.008), (int) (urlField.getHeight() + WIDTH * 0.008));
 		contorno.setOpaque(false);
 		contorno.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-		panelFondo.add(contorno);
+		background.add(contorno);
 
-		cargarImagenBtn = new Boton();
+		Boton cargarImagenBtn = new Boton();
 		cargarImagenBtn.setText("CARGAR VIDEO");
-		cargarImagenBtn.setBounds((int) (urlField.getX() + urlField.getWidth() * 0.1), nombreLabel.getY(),
+		cargarImagenBtn.setBounds((int) (urlField.getX() + urlField.getWidth() * 0.1), (int) (HEIGHT * 0.275),
 				(int) (urlField.getWidth() * 0.8), (int) (urlField.getHeight() * 1.75));
 		formato.formato(cargarImagenBtn, 0, (float) (HEIGHT * 0.03), (int) (WIDTH * 0.05), (int) (WIDTH * 0.0017));
-		MouseAdapter cargarImagen = new MouseAdapter() {
+		cargarImagenBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// urlField.setEditable(true);
 				JFileChooser buscador = new JFileChooser();
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos MP4", "mp4");
 				buscador.setFileFilter(filter);
@@ -229,17 +199,16 @@ public class PantallaIngresarVideo {
 					urlField.setText(selectedFile.getAbsolutePath());
 				}
 			}
-		};
-		cargarImagenBtn.addMouseListener(cargarImagen);
-		panelFondo.add(cargarImagenBtn);
+		});
+		background.add(cargarImagenBtn);
 	}
 	
-	private void initProy() {
-		idProyLabel = new JLabel("ID DEL PROYECTO:");
-		idProyLabel.setBounds((int) (urlLabel.getX()), (int) (descripcionLabel.getY()), (int) (WIDTH * 0.4),
+	private void initLabelProy() {
+		JLabel idProyLabel = new JLabel("ID DEL PROYECTO:");
+		idProyLabel.setBounds((int) (WIDTH * 0.55), (int) (fieldNombre.getY() + fieldNombre.getHeight() + HEIGHT * 0.05), (int) (WIDTH * 0.4),
 				(int) (HEIGHT * 0.055));
 		formato.formato(idProyLabel, 1, (float) (HEIGHT * 0.045));
-		panelFondo.add(idProyLabel);
+		background.add(idProyLabel);
 
 		ArrayList<Proyecto> proys = proyReg.extraerProyectos();
 		proy = proys.get(0);
@@ -249,7 +218,7 @@ public class PantallaIngresarVideo {
 		}
         comboBox = new JComboBox<>(opciones);
 		comboBox.setBounds((int) (idProyLabel.getX() + WIDTH * 0.025),
-				(int) (idProyLabel.getY() + nombreLabel.getHeight() + HEIGHT * 0.025), (int) (WIDTH * 0.35),
+				(int) (idProyLabel.getY() + (int) (HEIGHT * 0.055) + HEIGHT * 0.025), (int) (WIDTH * 0.35),
 				(int) (idProyLabel.getHeight()));
 		comboBox.setBackground(Color.decode("#09599B"));
 		formato.formato(comboBox, 1, (float) (HEIGHT * 0.040));
@@ -268,18 +237,17 @@ public class PantallaIngresarVideo {
 
 		});
 
-		panelFondo.add(comboBox);
-		guardarBtn = new Boton();
+		background.add(comboBox);
+		Boton guardarBtn = new Boton();
 		guardarBtn.setText("GUARDAR");
 		guardarBtn.setBounds((int) (comboBox.getX() + comboBox.getWidth() * 0.1),
 				(int) (descripcionArea.getY() + descripcionArea.getHeight() / 2), (int) (idProyLabel.getWidth() * 0.7),
 				(int) (idProyLabel.getHeight() * 1.75));
 		formato.formato(guardarBtn, 0, (float) (HEIGHT * 0.03), (int) (WIDTH * 0.05), (int) (WIDTH * 0.0017));
-		
-		MouseAdapter actualizarArchivo = new MouseAdapter() {
+		guardarBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String nombre = nombreField.getText().toUpperCase();
+				String nombre = fieldNombre.getText().toUpperCase();
 				String descripcion = descripcionArea.getText().toUpperCase();
 				String url = urlField.getText();
 				String idProy = "" + proy.getCodPyto();
@@ -288,7 +256,7 @@ public class PantallaIngresarVideo {
 				} catch (Exception ex) {
 					idProy = "";
 				}
-				if (!nombre.equals("") && !descripcion.equals("") && !url.equals("") && !idProy.equals("")) {
+				if (!nombre.isEmpty() && !descripcion.isEmpty() && !url.isEmpty() && !idProy.isEmpty()) {
 					StringBuilder mensaje = new StringBuilder();
 					mensaje.append("Guardar datos?");
 					mensaje.append("\n");
@@ -304,7 +272,6 @@ public class PantallaIngresarVideo {
 					mensaje.append("Proyecto ID: ");
 					mensaje.append(idProy);
 					Video v1 = new Video(0, nombre, descripcion, Integer.parseInt(idProy), 0, url, 1);
-					
 
 					int opt = JOptionPane.showConfirmDialog(null, mensaje.toString(), "Insert",
 							JOptionPane.YES_NO_OPTION);
@@ -312,7 +279,7 @@ public class PantallaIngresarVideo {
 						JOptionPane.showMessageDialog(null, "Archivo insertado con exito!", "Ingreso",
 								JOptionPane.INFORMATION_MESSAGE);
 						videoReg.agregar(v1);
-						reiniciarVentana();
+						resetFrame();
 					}
 
 				} else {
@@ -320,49 +287,32 @@ public class PantallaIngresarVideo {
 							JOptionPane.WARNING_MESSAGE);
 				}
 			}
-		};
-
-		guardarBtn.addMouseListener(actualizarArchivo);
-		panelFondo.add(guardarBtn);
+		});
+		background.add(guardarBtn);
 
 	}
 
-	private void reiniciarVentana() {
-		panelFondo.removeAll();
-		initComponentes();
-		panelFondo.repaint();
-		panelFondo.revalidate();
+	private void resetFrame() {
+		background.removeAll();
+		initContent();
+		background.repaint();
+		background.revalidate();
 	}
 
-	private void initBack() {
-		volverBtn = new Boton();
-		volverBtn.setText("VOLVER");
-		volverBtn.setBounds((int) (WIDTH * 0.5 - descripcionArea.getWidth() * 0.35),
+	private void initButtonBack() {
+		Boton buttonBack = new Boton();
+		buttonBack.setText("VOLVER");
+		buttonBack.setBounds((int) (WIDTH * 0.5 - descripcionArea.getWidth() * 0.35),
 				(int) (descripcionArea.getY() + descripcionArea.getHeight() + HEIGHT * 0.05),
-				(int) (descripcionArea.getWidth() * 0.7), (int) (descripcionLabel.getHeight() * 1.75));
-		formato.formato(volverBtn, 0, (float) (HEIGHT * 0.03), (int) (WIDTH * 0.05), (int) (WIDTH * 0.0017));
-
-		MouseAdapter volver = new MouseAdapter() {
-
+				(int) (descripcionArea.getWidth() * 0.7), (int) ((int) (HEIGHT * 0.055) * 1.75));
+		formato.formato(buttonBack, 0, (float) (HEIGHT * 0.03), (int) (WIDTH * 0.05), (int) (WIDTH * 0.0017));
+		buttonBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.remove(panelFondo);
-				PantallaCrudVideo pcv = new PantallaCrudVideo(ventana);
+				myFrame.remove(background);
+				PantallaCrudVideo pcv = new PantallaCrudVideo(myFrame);
 			}
-		};
-		volverBtn.addMouseListener(volver);
-		panelFondo.add(volverBtn);
+		});
+		background.add(buttonBack);
 	}
-
-	public static void main(String[] args) {
-		JFrame ventana = new JFrame();
-		ventana.setSize(1280, 720);
-		ventana.setTitle("ED-G5-UNMSM");
-		ventana.setLocationRelativeTo(null); // Aparece al medio la ventana
-		ventana.setResizable(false);
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ventana.setVisible(true);
-		PantallaIngresarVideo window = new PantallaIngresarVideo(ventana);
-	}
-
 }
