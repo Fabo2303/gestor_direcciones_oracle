@@ -1,7 +1,5 @@
 package application.inicial;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -10,9 +8,7 @@ import javax.swing.JLabel;
 
 import application.InterfazInicio;
 import application.ingresar.PantallaIngresarPdf;
-import application.ingresar.PantallaIngresarVideo;
 import application.tabla.TablaPDF;
-import application.tabla.TablaVideo;
 import application.utilidades.Boton;
 import application.utilidades.CustomPanel.ImagePanel;
 import application.utilidades.Formato;

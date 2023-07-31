@@ -19,17 +19,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import application.componentes.Pdf;
 import application.inicial.PantallaCrudPdf;
 import application.registros.PdfReg;
-import application.registros.VideoReg;
-import application.utilidades.Boton;
-import application.utilidades.CargaImagen;
-import application.utilidades.Formato;
-import application.utilidades.Reproductor;
+import application.utilidades.*;
+import application.utilidades.CustomPanel.ImagePanel;
 
 public class PantallaMostrarPdf {	
 	
-	private JFrame ventana;
-	private JPanel panelFondo;
-	private JLabel imagenFondo, codigoLabel, nombreLabel, descripcionLabel, urlLabel, idProyLabel;
+	private JFrame myFrame;
+	private ImagePanel background;
+	private JLabel codigoLabel, nombreLabel, descripcionLabel, urlLabel, idProyLabel;
 	private JTextField codigoField, nombreField, urlField, idProyField;
 	private JTextArea descripcionArea;
 	private Boton cargarImagenBtn, abrirBtn, activarBtn, guardarBtn, volverBtn;
@@ -41,38 +38,31 @@ public class PantallaMostrarPdf {
 	private final int HEIGHT = 720;
 	
 	public PantallaMostrarPdf(JFrame ventana_, Pdf archivo_) {
-		this.ventana = ventana_;
+		this.myFrame = ventana_;
 		this.archivo = archivo_;
-		this.panelFondo = new JPanel();
+		this.background = new ImagePanel("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
 		this.formato = new Formato();
 		this.pdfReg = new PdfReg();
 		this.editado = false;
 		configVentana();
 		initFondo();
 		initComponentes();
-		ventana.getContentPane().repaint();
-		ventana.getContentPane().revalidate();
+		myFrame.getContentPane().repaint();
+		myFrame.getContentPane().revalidate();
 	}
 
 	private void configVentana() {
-		ventana.setSize(WIDTH, HEIGHT);
-		ventana.setLocationRelativeTo(null);
-		panelFondo.setLayout(null);
-		ventana.getContentPane().add(panelFondo);
+		myFrame.setSize(WIDTH, HEIGHT);
+		myFrame.setLocationRelativeTo(null);
+		background.setLayout(null);
+		myFrame.getContentPane().add(background);
 	}
 
 	private void initFondo() {
-		ventana.setSize(WIDTH, HEIGHT);
-		ventana.setLocationRelativeTo(null);
+		myFrame.setSize(WIDTH, HEIGHT);
+		myFrame.setLocationRelativeTo(null);
 	}
-
-	private void pintarFondo() {
-		imagenFondo = new JLabel();
-		imagenFondo.setBounds(0, 0, WIDTH, HEIGHT);
-		CargaImagen.setImagen(imagenFondo, "fondo.png");
-		panelFondo.add(imagenFondo);
-	}
-
+	
 	private void initComponentes() {
 		initCodigo();
 		initNombre();
@@ -81,25 +71,24 @@ public class PantallaMostrarPdf {
 		initProy();
 		initBack();
 		initData();
-		pintarFondo();
 	}
 
 	private void initCodigo() {
 		codigoLabel = new JLabel("CODIGO DEL PDF:");
 		codigoLabel.setBounds((int)(WIDTH*0.05), (int)(HEIGHT*0.085), (int)(WIDTH*0.45), (int)(HEIGHT*0.055));
 		formato.formato(codigoLabel, 1, (float)(HEIGHT*0.045));
-		panelFondo.add(codigoLabel);
+		background.add(codigoLabel);
 		
 		codigoField = new JTextField();
 		codigoField.setBounds((int)(codigoLabel.getX()+WIDTH*0.025), (int)(codigoLabel.getY()+codigoLabel.getHeight()+HEIGHT*0.025), (int)(WIDTH*0.35), (int)(codigoLabel.getHeight()));
 		formato.formato(codigoField, 0, (float)(HEIGHT*0.035));
-		panelFondo.add(codigoField);
+		background.add(codigoField);
 		
 		JLabel contorno = new JLabel();
 		contorno.setBounds((int)(codigoField.getX()-WIDTH*0.004), (int)(codigoField.getY()-WIDTH*0.004), (int)(codigoField.getWidth()+WIDTH*0.008), (int)(codigoField.getHeight()+WIDTH*0.008));
 		contorno.setOpaque(false);
 		contorno.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-		panelFondo.add(contorno);
+		background.add(contorno);
 		
 	}
 
@@ -107,7 +96,7 @@ public class PantallaMostrarPdf {
 		nombreLabel = new JLabel("NOMBRE DEL PDF:");
 		nombreLabel.setBounds((int)(codigoLabel.getX()), (int)(codigoField.getY()+ codigoField.getHeight() + HEIGHT*0.05), (int)(codigoLabel.getWidth()), (int)(codigoLabel.getHeight()));
 		formato.formato(nombreLabel, 1, (float)(HEIGHT*0.045));
-		panelFondo.add(nombreLabel);
+		background.add(nombreLabel);
 		
 		nombreField = new JTextField();
 		nombreField.setBounds((int)(nombreLabel.getX()+WIDTH*0.025), (int)(nombreLabel.getY()+nombreLabel.getHeight()+HEIGHT*0.025), (int)(codigoField.getWidth()), (int)(codigoField.getHeight()));
@@ -122,20 +111,20 @@ public class PantallaMostrarPdf {
 		};
 		
 		nombreField.addMouseListener(editNombre);
-		panelFondo.add(nombreField);
+		background.add(nombreField);
 		
 		JLabel contorno = new JLabel();
 		contorno.setBounds((int)(nombreField.getX()-WIDTH*0.004), (int)(nombreField.getY()-WIDTH*0.004), (int)(nombreField.getWidth()+WIDTH*0.008), (int)(nombreField.getHeight()+WIDTH*0.008));
 		contorno.setOpaque(false);
 		contorno.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-		panelFondo.add(contorno);
+		background.add(contorno);
 	}
 
 	private void initDescripcion() {
 		descripcionLabel = new JLabel("DESCRIPCION:");
 		descripcionLabel.setBounds((int)(nombreLabel.getX()), (int)(nombreField.getY()+ nombreField.getHeight() + HEIGHT*0.05), (int)(nombreLabel.getWidth()), (int)(nombreLabel.getHeight()));
 		formato.formato(descripcionLabel, 1, (float)(HEIGHT*0.045));
-		panelFondo.add(descripcionLabel);
+		background.add(descripcionLabel);
 		
 		descripcionArea = new JTextArea();
 		descripcionArea.setBounds((int)(descripcionLabel.getX()+WIDTH*0.025), (int)(descripcionLabel.getY()+descripcionLabel.getHeight()+HEIGHT*0.025), (int)(nombreField.getWidth()), (int)(4.25*nombreField.getHeight()));
@@ -149,24 +138,24 @@ public class PantallaMostrarPdf {
 		};
 		
 		descripcionArea.addMouseListener(editDescrpcion);
-		panelFondo.add(descripcionArea);
+		background.add(descripcionArea);
 		
 		JScrollPane descripcionScroll = new JScrollPane(descripcionArea);
 		descripcionScroll.setBounds(descripcionArea.getX(), descripcionArea.getY(), descripcionArea.getWidth(), descripcionArea.getHeight());
-		panelFondo.add(descripcionScroll);
+		background.add(descripcionScroll);
 		
 		JLabel contorno = new JLabel();
 		contorno.setBounds((int)(descripcionArea.getX()-WIDTH*0.004), (int)(descripcionArea.getY()-WIDTH*0.004), (int)(descripcionArea.getWidth()+WIDTH*0.008), (int)(descripcionArea.getHeight()+WIDTH*0.008));
 		contorno.setOpaque(false);
 		contorno.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-		panelFondo.add(contorno);
+		background.add(contorno);
 	}
 
 	private void initUrl() {
 		urlLabel = new JLabel("URL:");
 		urlLabel.setBounds((int)(WIDTH*0.55), (int)(HEIGHT*0.085), (int)(WIDTH*0.4), (int)(HEIGHT*0.055));
 		formato.formato(urlLabel, 1, (float)(HEIGHT*0.045));
-		panelFondo.add(urlLabel);
+		background.add(urlLabel);
 		
 		urlField = new JTextField();
 		urlField.setBounds((int)(urlLabel.getX()+WIDTH*0.025), (int)(urlLabel.getY()+codigoLabel.getHeight()+HEIGHT*0.025), (int)(WIDTH*0.35), (int)(urlLabel.getHeight()	));
@@ -180,13 +169,13 @@ public class PantallaMostrarPdf {
 		};
 		
 		urlField.addMouseListener(editUrl);
-		panelFondo.add(urlField);
+		background.add(urlField);
 		
 		JLabel contorno = new JLabel();
 		contorno.setBounds((int)(urlField.getX()-WIDTH*0.004), (int)(urlField.getY()-WIDTH*0.004), (int)(urlField.getWidth()+WIDTH*0.008), (int)(urlField.getHeight()+WIDTH*0.008));
 		contorno.setOpaque(false);
 		contorno.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-		panelFondo.add(contorno);
+		background.add(contorno);
 		
 		cargarImagenBtn = new Boton();
 		cargarImagenBtn.setText("CARGAR PDF");
@@ -208,7 +197,7 @@ public class PantallaMostrarPdf {
 			}
 		};
 		cargarImagenBtn.addMouseListener(cargarImagen);
-		panelFondo.add(cargarImagenBtn);
+		background.add(cargarImagenBtn);
 		
 		abrirBtn = new Boton();
 		abrirBtn.setText("ABRIR");
@@ -224,25 +213,25 @@ public class PantallaMostrarPdf {
 			}
 		};
 		abrirBtn.addMouseListener(abrirImagen);
-		panelFondo.add(abrirBtn);
+		background.add(abrirBtn);
 	}
 
 	private void initProy() {
 		idProyLabel = new JLabel("ID DEL PROYECTO:");
 		idProyLabel.setBounds((int)(urlLabel.getX()), (int)(descripcionLabel.getY()), (int)(WIDTH*0.4), (int)(HEIGHT*0.055));
 		formato.formato(idProyLabel, 1, (float)(HEIGHT*0.045));
-		panelFondo.add(idProyLabel);
+		background.add(idProyLabel);
 		
 		idProyField = new JTextField();
 		idProyField.setBounds((int)(idProyLabel.getX()+WIDTH*0.025), (int)(idProyLabel.getY()+codigoLabel.getHeight()+HEIGHT*0.025), (int)(WIDTH*0.35), (int)(idProyLabel.getHeight()));
 		formato.formato(idProyField, 0, (float)(HEIGHT*0.035));
-		panelFondo.add(idProyField);
+		background.add(idProyField);
 		
 		JLabel contorno = new JLabel();
 		contorno.setBounds((int)(idProyField.getX()-WIDTH*0.004), (int)(idProyField.getY()-WIDTH*0.004), (int)(idProyField.getWidth()+WIDTH*0.008), (int)(idProyField.getHeight()+WIDTH*0.008));
 		contorno.setOpaque(false);
 		contorno.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-		panelFondo.add(contorno);
+		background.add(contorno);
 		
 		activarBtn = new Boton();
 		if(archivo.getVisualizacion()==1)
@@ -278,7 +267,7 @@ public class PantallaMostrarPdf {
 		};
 		
 		activarBtn.addMouseListener(activarArchivo);
-		panelFondo.add(activarBtn);
+		background.add(activarBtn);
 		
 		guardarBtn = new Boton();
 		guardarBtn.setText("GUARDAR");
@@ -324,8 +313,8 @@ public class PantallaMostrarPdf {
 		};
 		
 		guardarBtn.addMouseListener(actualizarArchivo);
-		panelFondo.add(activarBtn);
-		panelFondo.add(guardarBtn);
+		background.add(activarBtn);
+		background.add(guardarBtn);
 		
 	}
 
@@ -339,12 +328,12 @@ public class PantallaMostrarPdf {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// VOLVER A LA TABLA PDF
-				ventana.remove(panelFondo);
-				PantallaCrudPdf pcp = new PantallaCrudPdf(ventana);
+				myFrame.remove(background);
+				PantallaCrudPdf pcp = new PantallaCrudPdf(myFrame);
 			}
 		};
 		volverBtn.addMouseListener(volver);
-		panelFondo.add(volverBtn);
+		background.add(volverBtn);
 	}
 	
 	private void initData() {

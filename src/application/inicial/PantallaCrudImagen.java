@@ -1,27 +1,23 @@
 package application.inicial;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+
 
 import application.InterfazInicio;
 import application.ingresar.PantallaIngresarImagen;
-import application.ingresar.PantallaIngresarVideo;
 import application.tabla.TablaImagen;
-import application.tabla.TablaVideo;
 import application.utilidades.Boton;
-import application.utilidades.CargaImagen;
-import application.utilidades.CustomPanel;
+import application.utilidades.CustomPanel.ImagePanel;
 import application.utilidades.Formato;
 
 public class PantallaCrudImagen{
 	private JFrame myFrame;
-	private CustomPanel.ImagePanel background;
+	private ImagePanel background;
 	private Formato formato;
 	private final int WIDTH = 1280;
 	private final int HEIGHT = 720;
@@ -36,7 +32,7 @@ public class PantallaCrudImagen{
 	}
 	
 	private void initBackground() {
-		background = new CustomPanel.ImagePanel("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		background = new ImagePanel("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
 		background.setLayout(null);
 		myFrame.getContentPane().add(background);
 	}
