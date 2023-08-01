@@ -36,7 +36,7 @@ public class PantallaMostrarImagen extends ImagePanel{
 	private final int HEIGHT = 720;
 	
 	public PantallaMostrarImagen(JFrame myFrame, Imagen archivo) {
-		super("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		super("imagenes\\fondo.png");
 		setLayout(null);
 		this.myFrame = myFrame;
 		this.archivo = archivo;

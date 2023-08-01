@@ -20,7 +20,7 @@ public class PantallaCrudPdf extends ImagePanel{
 	private final int HEIGHT = 720;
 	
 	public PantallaCrudPdf(JFrame myFrame) {
-		super("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		super("imagenes\\fondo.png");
 		setLayout(null);
 		this.formato = new Formato();
 		this.myFrame = myFrame;

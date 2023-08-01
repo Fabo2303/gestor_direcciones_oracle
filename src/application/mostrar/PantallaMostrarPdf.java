@@ -36,7 +36,7 @@ public class PantallaMostrarPdf extends ImagePanel{
 	private final int HEIGHT = 720;
 	
 	public PantallaMostrarPdf(JFrame myFrame, Pdf archivo) {
-		super("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		super("imagenes\\fondo.png");
 		setLayout(null);
 		this.myFrame = myFrame;
 		this.archivo = archivo;

@@ -54,17 +54,6 @@ public class Formato {
 		button.configGradient(radius, Color.black, new Color(81, 112, 255), new Color(255, 102, 196), grosor);
 	}
 	
-	public void formato(Boton b, int estilo, float tamanio, int radius, int grosor) {
-		b.setFont(fuente.MyFont(estilo, tamanio));
-		b.setRadius(radius);
-		b.setGradienteColor(true);
-		b.setGradient(new Color(81, 112, 255), new Color(255, 102, 196));
-		b.setGradientOver(new Color(81, 112, 255, 150), new Color(255, 102, 196,150));
-		b.setGradientClick(new Color(81, 112, 255, 200), new Color(255, 102, 196, 200));
-		b.setBorderColor(new Color(0,0,0));
-		b.setGrosor(grosor);
-	}
-	
 	public void formato(JTable tabla, int estilo, float tamanio) {
 		tabla.setFont(fuente.MyFont(estilo, tamanio));
 		tabla.getTableHeader().setFont(fuente.MyFont(estilo, (float)(tamanio*0.65)));

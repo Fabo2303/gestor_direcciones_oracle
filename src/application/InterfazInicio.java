@@ -20,7 +20,7 @@ public class InterfazInicio extends ImagePanel{
 	private final int HEIGHT = 720;
 	
 	public InterfazInicio(JFrame myFrame) {
-		super("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		super("imagenes\\fondo.png");
 		this.myFrame = myFrame;
 		this.formato = new Formato();
 		setLayout(null);

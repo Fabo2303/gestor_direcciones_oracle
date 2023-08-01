@@ -41,7 +41,7 @@ public class PantallaIngresarVideo extends ImagePanel{
 	private final int HEIGHT = 720;
 
 	public PantallaIngresarVideo(JFrame myFrame) {
-		super("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		super("imagenes\\fondo.png");
 		setLayout(null);
 		this.myFrame = myFrame;
 		videoReg = new VideoReg();

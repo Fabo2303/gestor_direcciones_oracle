@@ -42,7 +42,7 @@ public class PantallaIngresarPdf extends ImagePanel{
 	private final int WIDTH = 1280;
 
 	public PantallaIngresarPdf(JFrame myFrame) {
-		super("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		super("imagenes\\fondo.png");
 		setLayout(null);
 		this.myFrame = myFrame;
 		pdfReg = new PdfReg();

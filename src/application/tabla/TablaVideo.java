@@ -43,7 +43,7 @@ public class TablaVideo extends ImagePanel{
 	JScrollPane scrollPane;
 
 	public TablaVideo(JFrame myFrame) {
-		super("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		super("imagenes\\fondo.png");
 		setLayout(null);
 		this.myFrame = myFrame;
 		this.formato = new Formato();

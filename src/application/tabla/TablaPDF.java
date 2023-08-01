@@ -43,7 +43,7 @@ public class TablaPDF extends ImagePanel {
 	JScrollPane scrollPane;
 
 	public TablaPDF(JFrame myFrame) {
-		super("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		super("imagenes\\fondo.png");
 		setLayout(null);
 		this.myFrame = myFrame;
 		this.formato = new Formato();
