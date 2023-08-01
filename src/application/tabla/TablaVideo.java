@@ -21,16 +21,16 @@ import application.InterfazInicio;
 import application.componentes.Video;
 import application.mostrar.PantallaMostrarVideo;
 import application.registros.VideoReg;
-import application.utilidades.Boton;
+import application.utilidades.CustomButton;
 import application.utilidades.CargaImagen;
 import application.utilidades.Formato;
+import application.utilidades.ImagePanel;
 
-public class TablaVideo {
-	private JFrame ventana;
-	private JPanel panelFondo;
-	private JLabel imagenFondo, codigoLabel, nombreLabel, seleccionadoLabel;
+public class TablaVideo extends ImagePanel{
+	private JFrame myFrame;
+	private JLabel codigoLabel, nombreLabel, seleccionadoLabel;
 	private JTextField seleccionadoField;
-	private Boton verDetalleBtn, botonRegresar;
+	private CustomButton verDetalleBtn, botonRegresar;
 	private Formato formato;
 	private DefaultTableModel tableModel;
 	private JComboBox<String> comboBox;
@@ -42,28 +42,15 @@ public class TablaVideo {
 	private String[][] m; // Cambiar el 15 por el tamaño de datos
 	JScrollPane scrollPane;
 
-	public TablaVideo(JFrame ventana_) {
-		this.ventana = ventana_;
-		this.panelFondo = new JPanel();
+	public TablaVideo(JFrame myFrame) {
+		super("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		setLayout(null);
+		this.myFrame = myFrame;
 		this.formato = new Formato();
 		this.videoReg = new VideoReg();
-		configVentana();
-		initFondo();
 		initComponentes();
-		ventana.getContentPane().repaint();
-		ventana.getContentPane().revalidate();
-	}
-
-	private void configVentana() {
-		ventana.setSize(WIDTH, HEIGHT);
-		ventana.setLocationRelativeTo(null);
-		panelFondo.setLayout(null);
-		ventana.getContentPane().add(panelFondo);
-	}
-
-	private void initFondo() {
-		ventana.setSize(WIDTH, HEIGHT);
-		ventana.setLocationRelativeTo(null);
+		myFrame.getContentPane().repaint();
+		myFrame.getContentPane().revalidate();
 	}
 
 	private void initLabelTitulo() {
@@ -71,7 +58,7 @@ public class TablaVideo {
 		nombreLabel.setBounds((int) (WIDTH * 0.05), (int) (HEIGHT * 0.15), (int) (WIDTH * 0.45),
 				(int) (HEIGHT * 0.055));
 		formato.formato(nombreLabel, 1, (float) (HEIGHT * 0.040));
-		panelFondo.add(nombreLabel);
+		add(nombreLabel);
 	}
 
 	private void initLabelPeliculaSeleccionada() {
@@ -79,7 +66,7 @@ public class TablaVideo {
 		codigoLabel.setBounds((int) (WIDTH * 0.30), (int) (HEIGHT * 0.05), (int) (WIDTH * 0.45),
 				(int) (HEIGHT * 0.055));
 		formato.formato(codigoLabel, 1, (float) (HEIGHT * 0.045));
-		panelFondo.add(codigoLabel);
+		add(codigoLabel);
 	}
 
 	private void initSeleccionada() {
@@ -87,55 +74,48 @@ public class TablaVideo {
 		seleccionadoLabel.setBounds((int) (WIDTH * 0.05), (int) (HEIGHT * 0.40), (int) (WIDTH * 0.45),
 				(int) (HEIGHT * 0.055));
 		formato.formato(seleccionadoLabel, 1, (float) (HEIGHT * 0.040));
-		panelFondo.add(seleccionadoLabel);
+		add(seleccionadoLabel);
 
 		seleccionadoField = new JTextField();
 		seleccionadoField.setBounds((int) (seleccionadoLabel.getX() + WIDTH * 0.025),
 				(int) (seleccionadoLabel.getY() + seleccionadoLabel.getHeight() + HEIGHT * 0.025), (int) (WIDTH * 0.30),
 				(int) (seleccionadoLabel.getHeight()));
 		formato.formato(seleccionadoField, 0, (float) (HEIGHT * 0.035));
-		panelFondo.add(seleccionadoField);
+		add(seleccionadoField);
 	}
 
 	private void botonVerDeTalle() {
-		verDetalleBtn = new Boton();
+		verDetalleBtn = new CustomButton();
 		formato = new Formato();
 		verDetalleBtn.setBounds((WIDTH * 2 / 17) / 2, (int) (HEIGHT * 0.60), (int) (WIDTH * 5 / 17),
 				(int) (HEIGHT * 7 / 72));
-		formato.formato(verDetalleBtn, 0, (float) (HEIGHT * 0.03), (int) (WIDTH * 0.05), (int) (WIDTH * 0.0017));
+		formato.formatButton(verDetalleBtn, 0, (float) (HEIGHT * 0.03), (int) (WIDTH * 0.05), (int) (WIDTH * 0.0017));
 		verDetalleBtn.setText("VER DETALLE");
 		verDetalleBtn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.remove(panelFondo);
-				PantallaMostrarVideo pai = new PantallaMostrarVideo(ventana, video);
+				myFrame.setContentPane(new PantallaMostrarVideo(myFrame, video));
+				myFrame.revalidate();
 			}
 		});
-		panelFondo.add(verDetalleBtn);
+		add(verDetalleBtn);
 	}
 	
 	private void botonRegresar() {
-		botonRegresar = new Boton();
+		botonRegresar = new CustomButton();
 		formato = new Formato();
 		botonRegresar.setBounds((WIDTH * 2 / 17) / 2, (int) (HEIGHT * 0.75), (int) (WIDTH * 5 / 17),
 				(int) (HEIGHT * 7 / 72));
-		formato.formato(botonRegresar, 0, (float) (HEIGHT * 0.03), (int) (WIDTH * 0.05), (int) (WIDTH * 0.0017));
+		formato.formatButton(botonRegresar, 0, (float) (HEIGHT * 0.03), (int) (WIDTH * 0.05), (int) (WIDTH * 0.0017));
 		botonRegresar.setText("REGRESAR");
 		botonRegresar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.remove(panelFondo);
-				InterfazInicio inicio = new InterfazInicio(ventana);
+				myFrame.setContentPane(new InterfazInicio(myFrame));
+				myFrame.revalidate();
 			}
 		});
-		panelFondo.add(botonRegresar);
-	}
-
-	private void pintarFondo() {
-		imagenFondo = new JLabel();
-		imagenFondo.setBounds(0, 0, WIDTH, HEIGHT);
-		CargaImagen.setImagen(imagenFondo, "fondo.png");
-		panelFondo.add(imagenFondo);
+		add(botonRegresar);
 	}
 
 	private void initComponentes() {
@@ -147,7 +127,6 @@ public class TablaVideo {
 		funcionarComboBox();
 		botonVerDeTalle();
 		botonRegresar();
-		pintarFondo();
 	}
 	
 	private void cargarDatos() {
@@ -203,7 +182,7 @@ public class TablaVideo {
 				}
 			}
 		});
-		panelFondo.add(scrollPane);
+		add(scrollPane);
 
 	}
 
@@ -252,7 +231,7 @@ public class TablaVideo {
 				}
 			}
 		});
-		panelFondo.add(scrollPane);
+		add(scrollPane);
 
 	}
 
@@ -279,8 +258,7 @@ public class TablaVideo {
 			}
 
 		});
-
-		panelFondo.add(comboBox);
+		add(comboBox);
 	}
 
 	private void mostrarNombreDePelicula(int tupla, String[][] m) {

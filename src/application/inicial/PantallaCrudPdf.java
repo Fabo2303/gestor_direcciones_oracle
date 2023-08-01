@@ -9,30 +9,24 @@ import javax.swing.JLabel;
 import application.InterfazInicio;
 import application.ingresar.PantallaIngresarPdf;
 import application.tabla.TablaPDF;
-import application.utilidades.Boton;
+import application.utilidades.CustomButton;
 import application.utilidades.ImagePanel;
 import application.utilidades.Formato;
 
-public class PantallaCrudPdf{
+public class PantallaCrudPdf extends ImagePanel{
 	private JFrame myFrame;
-	private ImagePanel background;
 	private Formato formato;
 	private final int WIDTH = 1280;
 	private final int HEIGHT = 720;
 	
 	public PantallaCrudPdf(JFrame myFrame) {
+		super("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		setLayout(null);
 		this.formato = new Formato();
 		this.myFrame = myFrame;
-		initBackground();
 		initContent();
 		myFrame.getContentPane().repaint();
 		myFrame.getContentPane().revalidate();
-	}
-	
-	private void initBackground() {
-		background = new ImagePanel("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
-		background.setLayout(null);
-		myFrame.getContentPane().add(background);
 	}
 
 	private void initContent(){
@@ -47,57 +41,57 @@ public class PantallaCrudPdf{
 		Text.setHorizontalAlignment(JLabel.CENTER);
 		Text.setBounds((int)(WIDTH*0.05), (int)(HEIGHT*0.09), (int)(WIDTH*0.9), (int)(HEIGHT*0.1));
 		formato.formato(Text, 0, (int)(WIDTH*0.0375));
-        background.add(Text);
+        add(Text);
 
         JLabel Text2 = new JLabel("Seleccione una opción:");
 		Text2.setHorizontalAlignment(JLabel.CENTER);
         Text2.setBounds((int)(WIDTH*0.175), (int)(HEIGHT*0.23), (int)(WIDTH*0.65), (int)(HEIGHT*0.1));
 		formato.formato(Text2, 0, (int)(WIDTH*0.02625));
-        background.add(Text2);
+        add(Text2);
 	}
 
 	private void initButtonAgregar(){
-		Boton buttonAgregar = new Boton();
+		CustomButton buttonAgregar = new CustomButton();
 		buttonAgregar.setBounds((WIDTH*11/17)/2, (int)(HEIGHT*0.37), (int)(WIDTH*6/17), (int)(HEIGHT*7/72));
-		formato.formato(buttonAgregar, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
+		formato.formatButton(buttonAgregar, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
 		buttonAgregar.setText("AGREGAR");
 		buttonAgregar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				myFrame.remove(background);
-				PantallaIngresarPdf pai = new PantallaIngresarPdf(myFrame);
+				myFrame.setContentPane(new PantallaIngresarPdf(myFrame));
+				myFrame.revalidate();
 			}
 		});
-		background.add(buttonAgregar);
+		add(buttonAgregar);
 	}
 
 	private void initButtonModificar(){
-		Boton buttonModificar = new Boton();
+		CustomButton buttonModificar = new CustomButton();
 		buttonModificar.setBounds((WIDTH*11/17)/2, (int)(HEIGHT*0.49), (int)(WIDTH*6/17), (int)(HEIGHT*7/72));
-		formato.formato(buttonModificar, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
+		formato.formatButton(buttonModificar, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
 		buttonModificar.setText("MODIFICAR");
 		buttonModificar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				myFrame.remove(background);
-				TablaPDF tablaPDF = new TablaPDF(myFrame);
+				myFrame.setContentPane(new TablaPDF(myFrame));
+				myFrame.revalidate();
 			}
 		});
-		background.add(buttonModificar);
+		add(buttonModificar);
 	}
 
 	private void initButtonBack(){
-		Boton buttonBack = new Boton();
+		CustomButton buttonBack = new CustomButton();
 		buttonBack.setBounds((WIDTH*11/17)/2, (int)(HEIGHT*0.61), (int)(WIDTH*6/17), (int)(HEIGHT*7/72));
-		formato.formato(buttonBack, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
+		formato.formatButton(buttonBack, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
 		buttonBack.setText("VOLVER");
 		buttonBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				myFrame.remove(background);
-				InterfazInicio ii = new InterfazInicio(myFrame);
+				myFrame.setContentPane(new InterfazInicio(myFrame));
+				myFrame.revalidate();
 			}
 		});
-		background.add(buttonBack);
+		add(buttonBack);
 	}
 }
