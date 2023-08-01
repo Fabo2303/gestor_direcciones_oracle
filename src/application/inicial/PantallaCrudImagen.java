@@ -12,7 +12,7 @@ import application.InterfazInicio;
 import application.ingresar.PantallaIngresarImagen;
 import application.tabla.TablaImagen;
 import application.utilidades.Boton;
-import application.utilidades.CustomPanel.ImagePanel;
+import application.utilidades.ImagePanel;
 import application.utilidades.Formato;
 
 public class PantallaCrudImagen{

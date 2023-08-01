@@ -20,7 +20,7 @@ import application.componentes.Pdf;
 import application.inicial.PantallaCrudPdf;
 import application.registros.PdfReg;
 import application.utilidades.*;
-import application.utilidades.CustomPanel.ImagePanel;
+import application.utilidades.ImagePanel;
 
 public class PantallaMostrarPdf {	
 	

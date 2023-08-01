@@ -25,7 +25,7 @@ import application.inicial.PantallaCrudVideo;
 import application.registros.ProyectoReg;
 import application.registros.VideoReg;
 import application.utilidades.Boton;
-import application.utilidades.CustomPanel.ImagePanel;
+import application.utilidades.ImagePanel;
 import application.utilidades.Formato;
 
 public class PantallaIngresarVideo {

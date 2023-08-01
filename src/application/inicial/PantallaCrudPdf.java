@@ -10,7 +10,7 @@ import application.InterfazInicio;
 import application.ingresar.PantallaIngresarPdf;
 import application.tabla.TablaPDF;
 import application.utilidades.Boton;
-import application.utilidades.CustomPanel.ImagePanel;
+import application.utilidades.ImagePanel;
 import application.utilidades.Formato;
 
 public class PantallaCrudPdf{

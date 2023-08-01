@@ -48,6 +48,11 @@ public class Formato {
 		ta.setBorder(BorderFactory.createEmptyBorder());
 		ta.setForeground(new Color(0, 0, 0));
 	}
+
+	public void formatButton(CustomButton button, int style, float font_size, int radius, int grosor){
+		button.setFont(fuente.MyFont(style, font_size));
+		button.configGradient(radius, Color.black, new Color(81, 112, 255), new Color(255, 102, 196), grosor);
+	}
 	
 	public void formato(Boton b, int estilo, float tamanio, int radius, int grosor) {
 		b.setFont(fuente.MyFont(estilo, tamanio));

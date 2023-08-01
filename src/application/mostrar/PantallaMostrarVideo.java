@@ -19,7 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import application.componentes.Video;
 import application.inicial.PantallaCrudVideo;
 import application.registros.VideoReg;
-import application.utilidades.CustomPanel.ImagePanel;
+import application.utilidades.ImagePanel;
 import application.utilidades.Boton;
 import application.utilidades.Formato;
 import application.utilidades.Reproductor;

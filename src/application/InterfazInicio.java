@@ -10,7 +10,8 @@ import application.inicial.PantallaCrudPdf;
 import application.inicial.PantallaCrudVideo;
 import application.tabla.TablaAuditoria;
 import application.utilidades.Boton;
-import application.utilidades.CustomPanel.ImagePanel;
+import application.utilidades.CustomButton;
+import application.utilidades.ImagePanel;
 import application.utilidades.Formato;
 
 public class InterfazInicio{
@@ -24,7 +25,6 @@ public class InterfazInicio{
 		this.formato = new Formato();
 		this.myFrame = new JFrame();
 		initFondo();
-		initFrame();
 		initContenido();
 	}
 	
@@ -32,20 +32,10 @@ public class InterfazInicio{
 		this.myFrame = myFrame;
 		this.formato = new Formato();
 		initFondo();
-		initFrame();
 		initContenido();
 	}
 
-	public void initFrame(){
-		myFrame.setSize(WIDTH,HEIGHT);
-		myFrame.setLocationRelativeTo(null);
-		myFrame.setTitle("Sitio web de peliculas");
-		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ImageIcon icon = new ImageIcon("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\server.png");
-		myFrame.setIconImage(icon.getImage());
-		myFrame.setResizable(false);
-		myFrame.setVisible(true);
-	}
+
 
 	private void initFondo() {
 		background = new ImagePanel("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
@@ -55,7 +45,7 @@ public class InterfazInicio{
 	
 	private void initContenido(){
 		initLabels();
-		initButtonVid();
+		initVideoButton();
 		initButtonPdf();
 		initButtonImage();
 		initButtonAuditoria();
@@ -77,19 +67,19 @@ public class InterfazInicio{
         background.add(Text2);
 	}
 
-	private void initButtonVid(){
-		Boton buttonVid = new Boton();
-		buttonVid.setBounds((WIDTH*11/17)/2, (int)(HEIGHT*0.37), (int)(WIDTH*6/17), (int)(HEIGHT*7/72));
-		formato.formato(buttonVid, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
-		buttonVid.setText("VIDEOS");
-		buttonVid.addMouseListener(new MouseAdapter() {
+	private void initVideoButton(){
+		CustomButton videoButton = new CustomButton();
+		videoButton.setBounds((WIDTH*11/17)/2, (int)(HEIGHT*0.37), (int)(WIDTH*6/17), (int)(HEIGHT*7/72));
+		videoButton.setText("VIDEOS");
+		formato.formatButton(videoButton, 0, (float)(HEIGHT*0.03), (int)(WIDTH*0.05), (int)(WIDTH*0.0017));
+		videoButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				myFrame.remove(background);
 				PantallaCrudVideo crudVideo = new PantallaCrudVideo(myFrame);
 			}
 		});
-		background.add(buttonVid);
+		background.add(videoButton);
 	}
 
 	private void initButtonPdf(){
@@ -136,8 +126,18 @@ public class InterfazInicio{
 		});
 		background.add(buttonAuditoria);
 	}
-	
+
 	public static void main(String[] args) {
+		JFrame myFrame = new JFrame();
+		myFrame.setSize(1280,720);
+		myFrame.setLocationRelativeTo(null);
+		myFrame.setTitle("Manejador de direcciones");
+		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		ImageIcon icon = new ImageIcon("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\server.png");
+		myFrame.setIconImage(icon.getImage());
+		myFrame.setResizable(false);
+		myFrame.setVisible(true);
 		InterfazInicio windows = new InterfazInicio();
+
 	}
 }

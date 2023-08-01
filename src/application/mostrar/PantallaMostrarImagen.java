@@ -20,7 +20,7 @@ import application.registros.ImagenReg;
 import application.utilidades.Boton;
 import application.utilidades.Formato;
 import application.utilidades.Reproductor;
-import application.utilidades.CustomPanel.ImagePanel;
+import application.utilidades.ImagePanel;
 
 public class PantallaMostrarImagen {	
 	

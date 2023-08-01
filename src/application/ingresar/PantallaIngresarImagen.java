@@ -30,13 +30,13 @@ import application.registros.ImagenReg;
 import application.registros.ProyectoReg;
 import application.utilidades.Boton;
 import application.utilidades.CargaImagen;
-import application.utilidades.CustomPanel;
+import application.utilidades.ImagePanel;
 import application.utilidades.Formato;
 
 public class PantallaIngresarImagen {
 
 	private JFrame myFrame;
-	private CustomPanel.ImagePanel background;
+	private ImagePanel background;
 	private JTextField fieldNombre, urlField;
 	private JTextArea descripcionArea;
 	private Formato formato;
@@ -59,7 +59,7 @@ public class PantallaIngresarImagen {
 	}
 
 	private void initBackground() {
-		background = new CustomPanel.ImagePanel("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
+		background = new ImagePanel("C:\\Users\\fabia\\IdeaProjects\\gestor_direcciones_oracle\\imagenes\\fondo.png");
 		background.setLayout(null);
 		myFrame.getContentPane().add(background);
 	}
