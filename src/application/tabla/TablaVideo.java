@@ -11,7 +11,6 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -22,7 +21,6 @@ import application.componentes.Video;
 import application.mostrar.PantallaMostrarVideo;
 import application.registros.VideoReg;
 import application.utilidades.CustomButton;
-import application.utilidades.CargaImagen;
 import application.utilidades.Formato;
 import application.utilidades.ImagePanel;
 
